@@ -10,6 +10,7 @@
 ![[Pastedimage20220617134252.png]]
 #### Server
 ![[Pasted image 20220617134225.png]]
+![[Pasted image 20220624181139.png]]
 
 
 <div style="page-break-after: always; visibility: hidden">
@@ -25,11 +26,13 @@
 	<li>RMD</li>
 	<li>MKD</li>
 	<li>DELE</li>
-	<li>RETR></li>
+	<li><b>RETR</b></li>
+	<li><b>STOR with ABOR</b></li>
 	<li>CDUP</li>
 	<li>CWD</li>
 	<li>PWD</li>
 	<li>LIST</li>
+	<li>RMD</li>
 </ul>
 
 	
@@ -37,6 +40,8 @@
 
 User: user
 Password: 1234
+
+<b>All users with passwords are loaded from user.config file</b>
 
 <div style="page-break-after: always; visibility: hidden">
 \pagebreak
@@ -55,22 +60,26 @@ All files and subfolders in "public" folder of the server will be hosted
 ### Example usage:  Client
 
 #### Connecting
-Run GigaFTPClient and perform authorization steps:
+Run GigaFTPClient and connect to server:
+
+![[Pasted image 20220624180519.png]]
+
+Perform authorization steps:
 
 Type USER and wait for response,
 Then type username "user":
-![[Pasted image 20220617131921.png]]
+
+![[Pasted image 20220624181312.png]]
 
 Type PASS and wait for response,
 Then type password "1234":
 
-![[Pasted image 20220617132040.png]]
+![[Pasted image 20220624181318.png]]
 
 Type PORT and wait for response,
 Then set Active Mode for port "3020":
 
-![[Pasted image 20220617132156.png]]
-
+![[Pasted image 20220624181332.png]]
 <div style="page-break-after: always; visibility: hidden">
 \pagebreak
 </div>
@@ -92,5 +101,22 @@ LIST:
 RETR:
 ![[Pasted image 20220617134040.png]]
 
+STOR:
+
+![[Pasted image 20220624180701.png]]
+![[Pasted image 20220624180714.png]]
+
+if file does not exists in client directory. 
+Client sends ABOR command
+
+![[Pasted image 20220624180820.png]]
+
 QUIT:
-![[Pasted image 20220617134131.png]]
+![[Pasted image 20220624181049.png]]
+
+#### FTP  test: FTPServer outside Localhost:
+![[Pasted image 20220624182651.png]]
+![[Pasted image 20220624183056.png]]
+![[Pasted image 20220624185638.png]]
+Success: Image file is not corrupted:
+![[Pasted image 20220624190403.png]]

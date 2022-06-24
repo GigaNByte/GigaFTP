@@ -1,3 +1,4 @@
+
 import java.io.*;
 import java.net.Socket;
 import java.util.Scanner;
@@ -10,7 +11,6 @@ public class GigaFTPClient {
         // create connection
         client.createConnection();
     }
-
 
     private int dataPort = 21;
     private String username;
@@ -41,7 +41,7 @@ public class GigaFTPClient {
         InputStream in = null;
         Scanner scanner = new Scanner(System.in);
         String host = "";
-        //print welcome message
+        // print welcome message
 
         while (true) {
             System.out.println("Welcome to GigaFTPClient use OPEN command to open connection to GigaFTP server");
@@ -55,7 +55,7 @@ public class GigaFTPClient {
                     // close scanner
                 } catch (Exception e) {
                     System.out.println("Error closing socket");
-                    //e.printStackTrace();
+                    // e.printStackTrace();
                 }
                 scanner.close();
                 System.out.println("Thank you for using GigaFTPClient by GigaMorswin");
@@ -102,20 +102,19 @@ public class GigaFTPClient {
                             tempCommand = command;
                         }
 
-
                         // write command to server
-
 
                         if (storeCommand) {
                             clientFilename = tempCommand;
-                            //check if file exists
+                            // check if file exists
                             if (!new File(clientFilename).exists()) {
                                 System.out.println("FTPClient: file doesnt exist");
                                 out.write("ABOR".getBytes());
-                            }else{
+                                storeCommand = false;
+                            } else {
                                 out.write(command.getBytes());
                             }
-                        }else{
+                        } else {
                             out.write(command.getBytes());
                         }
                         // read response
@@ -131,23 +130,21 @@ public class GigaFTPClient {
                             // cast response to int
                             dataPort = Integer.parseInt(tempPort);
                         }
-                        //it shouldnt be coded like that but it works bcause I don't know why field returns null
+                        // it shouldnt be coded like that but it works bcause I don't know why field
+                        // returns null
 
-                           /*
-                            if (responseCode.equals("550")){
-                                System.out.println(response);
-                            }
-
-                            */
+                        /*
+                         * if (responseCode.equals("550")){
+                         * System.out.println(response);
+                         * }
+                         * 
+                         */
 
                         if (command.equals("STOR")) {
                             storeCommand = true;
                         }
 
-
                         if (responseCode.equals("150")) {
-
-                            System.out.println(clientFilename);
                             while (!(responseCode.equals("226") || responseCode.equals("426"))) {
 
                                 if (responseCode.equals("125") && response != "") {
@@ -158,8 +155,8 @@ public class GigaFTPClient {
                                         socket = new Socket(host, dataPort);
 
                                         OutputStream out2 = socket.getOutputStream();
-                                        System.out.println(clientFilename);
-                                        //send file to server
+                                        // send file to server
+
                                         InputStream fileInputStream = new FileInputStream(clientFilename);
                                         fileInputStream.transferTo(out2);
 
@@ -169,15 +166,16 @@ public class GigaFTPClient {
                                     } else {
                                         Socket dataSocket = new Socket(host, dataPort);
                                         // create input stream
-                                        InputStream dataIn = dataSocket.getInputStream();
+                                        BufferedInputStream dataIn = new BufferedInputStream(
+                                                dataSocket.getInputStream());
                                         // create file output stream
                                         System.out.println("Saving file to " + command);
-                                        OutputStream dataOut = new FileOutputStream(command);
+                                        FileOutputStream dataOut = new FileOutputStream(command);
                                         // read data from server
-                                        byte[] dataBuffer = new byte[1024];
-                                        // if buffer is overfilled, read until buffer is empty
-                                        while (dataIn.read(dataBuffer) != -1) {
-                                            dataOut.write(dataBuffer);
+                                        int c = 0;
+
+                                        while ((c = dataIn.read()) != -1) {
+                                            dataOut.write(c);
                                         }
                                         // close file output stream
                                         dataOut.close();
@@ -208,7 +206,8 @@ public class GigaFTPClient {
                     }
 
                 } catch (Exception e) {
-                    System.out.println("Connection has been not estabilished using port or server is not available anymore");
+                    System.out.println(
+                            "Connection has been not estabilished using port or server is not available anymore");
                     // e.printStackTrace();
                 } finally {
                     try {
@@ -219,7 +218,7 @@ public class GigaFTPClient {
 
                     } catch (Exception e) {
                         System.out.println("Error closing socket");
-                        //e.printStackTrace();
+                        // e.printStackTrace();
                     }
                 }
 

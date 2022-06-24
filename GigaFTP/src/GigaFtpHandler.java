@@ -30,7 +30,7 @@ class GigaFtpHandler implements Runnable {
             try {
                 socket.close();
             } catch (Exception e) {
-                //print connection closed
+                // print connection closed
                 System.out.println("Connection closed");
             }
         }
@@ -77,7 +77,6 @@ class GigaFtpHandler implements Runnable {
                         // get all files in public current directory
                         String[] files = GigaFtp.getFiles(publicDir + cwd);
 
-
                         // for each file in file array
 
                         for (String file : files) {
@@ -108,7 +107,7 @@ class GigaFtpHandler implements Runnable {
                         out.write("214 Command CWD: ".getBytes());
                         String directory = "/" + readRequest(in);
                         // check if directory exists
-                        //replace double slashes with single slash
+                        // replace double slashes with single slash
                         directory = directory.replace("//", "/");
 
                         File dir = new File(publicDir + directory);
@@ -133,7 +132,7 @@ class GigaFtpHandler implements Runnable {
                             out.write(info.getBytes());
                         } else {
                             // remove last directory from directory variable
-                            //check if directory has any slash
+                            // check if directory has any slash
 
                             cwd = cwd.substring(0, cwd.lastIndexOf("/"));
                             // write response to client
@@ -156,11 +155,11 @@ class GigaFtpHandler implements Runnable {
                         if (!f.exists() || f.isDirectory()) {
                             out.write("550 File does not exist.\n".getBytes());
                         } else {
-                            //switch to binary mode write code
+                            // switch to binary mode write code
                             String infoRetr = "150 Opening BINARY mode data connection for " + file + "\n";
 
                             out.write(infoRetr.getBytes());
-                            //use openDataSocket to send file
+                            // use openDataSocket to send file
                             Boolean status = openDataSocket(cwd, file);
 
                         }
@@ -175,10 +174,10 @@ class GigaFtpHandler implements Runnable {
                         out.write("214 Command STOR: ".getBytes());
                         String fileName = readRequest(in);
 
-                        //if ABOR is sent, close data socket and return to command mode
+                        // if ABOR is sent, close data socket and return to command mode
                         if (fileName.equals("ABOR")) {
                             out.write("226 ABOR command successful.\n".getBytes());
-                        }else {
+                        } else {
                             // check if file exists
                             // write response to client
                             File f1 = new File(publicDir + cwd + "/" + fileName);
@@ -186,17 +185,16 @@ class GigaFtpHandler implements Runnable {
                             if (f1.isDirectory()) {
                                 out.write("550 File is directory.\n".getBytes());
                             } else {
-                                //switch to binary mode write code
+                                // switch to binary mode write code
                                 String infoStor = "150 Opening BINARY mode data connection for " + fileName + "\n";
                                 out.write(infoStor.getBytes());
-                                //use openDataSocket to send file
+                                // use openDataSocket to send file
                                 Boolean status = openInputDataSocket(cwd, fileName);
                             }
                         }
                     } else {
                         out.write("530 Not logged in.\n".getBytes());
                     }
-
 
                     break;
                 case "DELE":
@@ -260,9 +258,9 @@ class GigaFtpHandler implements Runnable {
                         // read port from ftp client and store in port variable
                         out.write("214 Command PORT: ".getBytes());
                         String port = readRequest(in);
-                        //validate port
+                        // validate port
                         if (validatePort(port)) {
-                            //cast port to int
+                            // cast port to int
                             portNumber = Integer.parseInt(port);
                             // write response to client
                             out.write("200 PORT command successful.\n".getBytes());
@@ -290,7 +288,7 @@ class GigaFtpHandler implements Runnable {
 
     private Boolean validatePort(String port) {
         // validate port
-        //check if all characters are numbers
+        // check if all characters are numbers
         for (int i = 0; i < port.length(); i++) {
             if (!Character.isDigit(port.charAt(i))) {
                 return false;
@@ -311,7 +309,6 @@ class GigaFtpHandler implements Runnable {
         }
         return new String(buffer, 0, bytesRead);
     }
-
 
     private String getUserName(Socket socket) {
         // get input stream
@@ -377,8 +374,8 @@ class GigaFtpHandler implements Runnable {
         return this.user != null && this.password != null;
     }
 
-
-    //create method that opens the ftp second data socket and awaits for client connection
+    // create method that opens the ftp second data socket and awaits for client
+    // connection
     private Boolean openInputDataSocket(String directory, String fileName) throws IOException {
         Boolean flag = false;
         try {
@@ -396,42 +393,39 @@ class GigaFtpHandler implements Runnable {
                 }
             });
 
-
             // accept client connection in loop
             OutputStream out = socket.getOutputStream();
-            //write response to client to indicate that server is ready to receive data
+            // write response to client to indicate that server is ready to receive data
             String outputResponse = "150 Opening BINARY mode data connection for file upload" + "\n";
             out.write(outputResponse.getBytes());
 
-            out.write("125 Data connection already open; transfer starting.\n".getBytes()); // IDK: it will desynchronize with the client?
+            out.write("125 Data connection already open; transfer starting.\n".getBytes()); // IDK: it will
+                                                                                            // desynchronize with the
+                                                                                            // client?
             Socket clientSocket = dataSocket.accept();
             // send 125 code
 
             // create input stream load file from client
 
-            InputStream dataIn = clientSocket.getInputStream();
-            //create file output stream
+            BufferedInputStream dataIn = new BufferedInputStream(clientSocket.getInputStream());
+            // create file output stream
             System.out.println("Saving file to " + cwd + "/" + fileName);
-            //output Stream to write to file in current directory
+            // output Stream to write to file in current directory
             File file = new File(System.getProperty("user.dir") + "\\public\\" + directory + "\\" + fileName);
-            OutputStream dataOut = new FileOutputStream(file);
-
-            //read data from server
-            byte[] dataBuffer = new byte[1024];
+            FileOutputStream dataOut = new FileOutputStream(file);
             int bytesRead = 0;
-            while ((bytesRead = dataIn.read(dataBuffer)) != -1) {
-                dataOut.write(dataBuffer, 0, bytesRead);
+            while ((bytesRead = dataIn.read()) != -1) {
+                dataOut.write(bytesRead);
             }
 
-            //close file output stream
+            // close file output stream
             dataOut.close();
             // close client socket
             clientSocket.close();
             // close server socket
             dataSocket.close();
 
-
-            //check transfer is successful and send code do socket
+            // check transfer is successful and send code do socket
             if (new File(publicDir + cwd + "/" + fileName).exists()) {
                 out.write("226 Transfer complete.\n".getBytes());
                 flag = true;
@@ -446,8 +440,8 @@ class GigaFtpHandler implements Runnable {
         return flag;
     }
 
-
-    //create method that opens the ftp second data socket and awaits for client connection
+    // create method that opens the ftp second data socket and awaits for client
+    // connection
     private Boolean openDataSocket(String directory, String fileName) throws IOException {
         Boolean flag = false;
         try {
@@ -467,8 +461,9 @@ class GigaFtpHandler implements Runnable {
             });
             // accept client connection in loop
             OutputStream out = socket.getOutputStream();
-            out.write("125 Data connection already open; transfer starting.\n".getBytes()); // IDK: it will desynchronize with the client?
-
+            out.write("125 Data connection already open; transfer starting.\n".getBytes()); // IDK: it will
+                                                                                            // desynchronize with the
+                                                                                            // client?
 
             Socket clientSocket = dataSocket.accept();
             // send 125 code
@@ -478,19 +473,16 @@ class GigaFtpHandler implements Runnable {
             File file = new File(System.getProperty("user.dir") + "\\public\\" + directory + "\\" + fileName);
             // create file input stream
 
-
             InputStream fileInputStream = new FileInputStream(file);
             // write file input stream to output stream
             fileInputStream.transferTo(outputStream);
-
 
             // close client socket
             clientSocket.close();
             // close server socket
             dataSocket.close();
 
-
-            //check transfer is successful and send code do socket
+            // check transfer is successful and send code do socket
             if (file.exists()) {
                 out.write("226 Transfer complete.\n".getBytes());
                 flag = true;

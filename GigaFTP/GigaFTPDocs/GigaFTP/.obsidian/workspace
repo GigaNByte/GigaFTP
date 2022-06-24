@@ -7,9 +7,10 @@
         "id": "bb8158c23d9c9356",
         "type": "leaf",
         "state": {
-          "type": "image",
+          "type": "markdown",
           "state": {
-            "file": "Pastedimage20220617134252.png"
+            "file": "Untitled.md",
+            "mode": "source"
           }
         }
       }
@@ -67,7 +68,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Pastedimage20220617134252.png",
+                "file": "Untitled.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -87,9 +88,9 @@
   },
   "active": "bb8158c23d9c9356",
   "lastOpenFiles": [
+    "Untitled.md",
     "Pastedimage20220617134252.png",
     "Pastedimage2020617131921.png",
-    "Pastedimage20220617132156.png",
-    "Untitled.md"
+    "Pastedimage20220617132156.png"
   ]
 }
