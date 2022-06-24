@@ -1,0 +1,95 @@
+{
+  "main": {
+    "id": "9c8067a236e0190b",
+    "type": "split",
+    "children": [
+      {
+        "id": "daaefd44ea4abeb3",
+        "type": "leaf",
+        "state": {
+          "type": "markdown",
+          "state": {
+            "file": "Untitled.md",
+            "mode": "source"
+          }
+        }
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "61c0a2bef2b3fb74",
+    "type": "split",
+    "children": [
+      {
+        "id": "666a92ea3c7e4d69",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "ba6d151e187bdb22",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {}
+            }
+          },
+          {
+            "id": "69255b2ee01f33a8",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "b4738083b2c67db8",
+    "type": "split",
+    "children": [
+      {
+        "id": "6792bf1b1e5fc15a",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "60f70856ab853005",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Untitled.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "active": "daaefd44ea4abeb3",
+  "lastOpenFiles": [
+    "Untitled.md",
+    "readme.gif",
+    "Pasted image 20220619225423.png"
+  ]
+}
