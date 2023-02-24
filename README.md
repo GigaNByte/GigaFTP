@@ -7,9 +7,9 @@
 
 ### Project files
 #### Client
-![[./docs/Pastedimage20220617134252.png]]
+![](./docs/Pastedimage20220617134252.png)
 #### Server
-![[./docs/Pastedimage20220617134225.png]]
+![](./docs/Pastedimage20220617134225.png)
 
 
 <div style="page-break-after: always; visibility: hidden">
@@ -46,7 +46,7 @@ Password: 1234
 Run GigaFTP
 All files and subfolders in "public" folder of the server will be hosted
 
-![[./docs/Pastedimage20220617132751.png]]
+![](./docs/Pastedimage20220617132751.png)
 
 <div style="page-break-after: always; visibility: hidden">
 \pagebreak
@@ -59,17 +59,17 @@ Run GigaFTPClient and perform authorization steps:
 
 Type USER and wait for response,
 Then type username "user":
-![[Pasted image 20220617131921.png]]
+![[Pasted image 20220617131921.png)
 
 Type PASS and wait for response,
 Then type password "1234":
 
-![[./docs/Pastedimage20220617132156.png]]
+![](./docs/Pastedimage20220617132156.png)
 
 Type PORT and wait for response,
 Then set Active Mode for port "3020":
 
-![[./docs/Pastedimage20220617132156.png]]
+![](./docs/Pastedimage20220617132156.png)
 
 <div style="page-break-after: always; visibility: hidden">
 \pagebreak
@@ -81,16 +81,16 @@ Now you can retrieve files correctly, you can use supported commands for example
 
 PWD:
 
-![[./docs/Pastedimage20220617132434.png]]
+![](./docs/Pastedimage20220617132434.png)
 
 CWD:
-![[./docs/Pastedimage20220617132920.png]]
+![](./docs/Pastedimage20220617132920.png)
 
 LIST:
-![[./docs/Pastedimage20220617134102.png]]
+![](./docs/Pastedimage20220617134102.png)
 
 RETR:
-![[./docs/Pastedimage20220617134040.png]]
+![](./docs/Pastedimage20220617134040.png)
 
 QUIT:
-![[./docs/Pastedimage20220617134131.png]]
+![](./docs/Pastedimage20220617134131.png)
