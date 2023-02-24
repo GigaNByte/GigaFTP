@@ -12,9 +12,7 @@
 ![](./docs/Pastedimage20220617134225.png)
 
 
-<div style="page-break-after: always; visibility: hidden">
-\pagebreak
-</div>
+
 
 ### Available commands
 <ul>
@@ -25,7 +23,8 @@
 	<li>RMD</li>
 	<li>MKD</li>
 	<li>DELE</li>
-	<li>RETR></li>
+	<li>RETR</li>
+	<li>STOR with ABOR</li>
 	<li>CDUP</li>
 	<li>CWD</li>
 	<li>PWD</li>
@@ -38,9 +37,7 @@
 User: user
 Password: 1234
 
-<div style="page-break-after: always; visibility: hidden">
-\pagebreak
-</div>
+All users with passwords are loaded from user.config file
 
 ### Example usage:  Server
 Run GigaFTP
@@ -48,9 +45,7 @@ All files and subfolders in "public" folder of the server will be hosted
 
 ![](./docs/Pastedimage20220617132751.png)
 
-<div style="page-break-after: always; visibility: hidden">
-\pagebreak
-</div>
+
 
 ### Example usage:  Client
 
@@ -71,9 +66,7 @@ Then set Active Mode for port "3020":
 
 ![](./docs/Pastedimage20220617132156.png)
 
-<div style="page-break-after: always; visibility: hidden">
-\pagebreak
-</div>
+
 
 #### FTP Commands example
 
@@ -84,13 +77,17 @@ PWD:
 ![](./docs/Pastedimage20220617132434.png)
 
 CWD:
+
 ![](./docs/Pastedimage20220617132920.png)
 
 LIST:
+
 ![](./docs/Pastedimage20220617134102.png)
 
 RETR:
+
 ![](./docs/Pastedimage20220617134040.png)
 
 QUIT:
+
 ![](./docs/Pastedimage20220617134131.png)
